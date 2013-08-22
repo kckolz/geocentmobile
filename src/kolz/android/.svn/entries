@@ -1,0 +1,92 @@
+10
+
+dir
+33
+http://kolz.unfuddle.com/svn/kolz_geocentmobile/GeocentMobile/src/kolz/android
+http://kolz.unfuddle.com/svn/kolz_geocentmobile
+
+
+
+2012-02-02T21:51:48.564264Z
+33
+kckolz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fd5448ed-45b1-457e-9985-0b5a3ba9a378
+
+MainActivity.java
+file
+
+
+
+
+2012-02-03T00:01:11.514290Z
+0b96d500bf2ae1433d27d34c49945ce4
+2012-02-02T21:51:48.564264Z
+33
+kckolz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5620
+
+exceptions
+dir
+
+mapoverlays
+dir
+
+adapters
+dir
+
+services
+dir
+
+activities
+dir
+
+domain
+dir
+
+enums
+dir
+
+rss
+dir
+
+security
+dir
+
+network
+dir
+

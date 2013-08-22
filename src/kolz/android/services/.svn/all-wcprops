@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/kolz_geocentmobile/!svn/ver/32/GeocentMobile/src/kolz/android/services
+END
+AuthenticationService.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/kolz_geocentmobile/!svn/ver/32/GeocentMobile/src/kolz/android/services/AuthenticationService.java
+END
+CoordinateService.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/kolz_geocentmobile/!svn/ver/25/GeocentMobile/src/kolz/android/services/CoordinateService.java
+END
+LocationService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/kolz_geocentmobile/!svn/ver/21/GeocentMobile/src/kolz/android/services/LocationService.java
+END
+JobService.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/kolz_geocentmobile/!svn/ver/25/GeocentMobile/src/kolz/android/services/JobService.java
+END
+RestClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/kolz_geocentmobile/!svn/ver/24/GeocentMobile/src/kolz/android/services/RestClient.java
+END

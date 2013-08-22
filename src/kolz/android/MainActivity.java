@@ -1,0 +1,182 @@
+package kolz.android;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import kolz.android.activities.AboutActivity;
+import kolz.android.activities.DeltekActivity;
+import kolz.android.activities.JobActivity;
+import kolz.android.activities.LocationActivity;
+import kolz.android.activities.NewsActivity;
+import kolz.android.domain.Credentials;
+import kolz.android.security.ObscuredSharedPreferences;
+import kolz.android.services.AuthenticationService;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	private static final String TAG = "MainActivity";
+	private SharedPreferences preferences;
+	private AuthenticationService authService;
+	private ProgressDialog progressDialog = null;
+
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+
+		final Button newsButton = (Button) findViewById(R.id.newsbutton);
+		newsButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Credentials creds = Credentials.getInstance();
+				if (!creds.isLoggedIn()) {
+					String error = "Must login to access news";
+					Toast toast = Toast.makeText(getApplicationContext(),
+							error, Toast.LENGTH_LONG);
+					toast.setGravity(Gravity.TOP, 0, 0);
+					toast.show();
+				} else {
+					startActivity(new Intent(MainActivity.this,
+							NewsActivity.class));
+				}
+			}
+		});
+
+		final Button deltekButton = (Button) findViewById(R.id.deltekbutton);
+		deltekButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this,
+						DeltekActivity.class));
+			}
+		});
+
+		final Button jobButton = (Button) findViewById(R.id.jobbutton);
+		jobButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this,
+						LocationActivity.class));
+			}
+		});
+
+		final Button aboutButton = (Button) findViewById(R.id.aboutbutton);
+		aboutButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this, AboutActivity.class));
+			}
+		});
+
+		final Button loginButton = (Button) findViewById(R.id.loginbutton);
+		loginButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showLoginPrompt();
+			}
+		});
+	}
+
+	// This will open a prompt to allow the user to enter login credentials
+	private void showLoginPrompt() {
+		LayoutInflater factory = LayoutInflater.from(this);
+		final View textEntryView = factory.inflate(R.layout.passworddialog,
+				null);
+		final EditText usernameInput = (EditText) textEntryView
+				.findViewById(R.id.usernameprompt);
+		final EditText passwordInput = (EditText) textEntryView
+				.findViewById(R.id.passwordprompt);
+
+		preferences = new ObscuredSharedPreferences(this,
+				this.getSharedPreferences(getString(R.string.preferences),
+						Context.MODE_PRIVATE));
+
+		if (preferences.contains("savedCredentials")) {
+			usernameInput.setText(preferences.getString("username", ""));
+			passwordInput.setText(preferences.getString("password", ""));
+		}
+
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+		alert.setTitle("Enter Username/Password");
+		alert.setView(textEntryView);
+		alert.setPositiveButton("Submit",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						progressDialog = ProgressDialog.show(MainActivity.this,
+								"Please wait...", "Logging In ...", true);
+						String username = usernameInput.getText().toString()
+								.trim();
+						String password = passwordInput.getText().toString()
+								.trim();
+						final CheckBox savePassword = (CheckBox) textEntryView
+								.findViewById(R.id.savepassword);
+						Credentials creds = Credentials.getInstance();
+						creds.setUsername(username);
+						creds.setPassword(password);
+
+						if (validateCredentials()) {
+							if (savePassword.isChecked()) {
+								storeCredentials(username, password);
+							}
+							creds.setLoggedIn(true);
+							progressDialog.dismiss();
+							Toast toast = Toast.makeText(
+									getApplicationContext(),
+									"Login Successful", Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.TOP, 0, 0);
+							toast.show();
+						} else {
+							progressDialog.dismiss();
+							Toast toast = Toast.makeText(
+									getApplicationContext(), "Login Failed",
+									Toast.LENGTH_LONG);
+							toast.setGravity(Gravity.TOP, 0, 0);
+							toast.show();
+						}
+					}
+				});
+		alert.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+
+					}
+				});
+		alert.show();
+	}
+
+	private boolean validateCredentials() {
+		try {
+			authService = new AuthenticationService(new URL(
+					getString(R.string.feed_url)));
+			return authService.loginValid();
+		} catch (MalformedURLException e) {
+			Log.e("MainActivity", "Bad URL");
+			return false;
+		}
+	}
+
+	private void storeCredentials(String username, String password) {
+		preferences = new ObscuredSharedPreferences(this,
+				this.getSharedPreferences(getString(R.string.preferences),
+						Context.MODE_PRIVATE));
+		Editor e = preferences.edit();
+		e.putString("username", username);
+		e.putString("password", password);
+		e.commit();
+	}
+
+}

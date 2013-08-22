@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/kolz_geocentmobile/!svn/ver/32/GeocentMobile/src/kolz/android/rss
+END
+FeedParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/kolz_geocentmobile/!svn/ver/28/GeocentMobile/src/kolz/android/rss/FeedParser.java
+END
+BaseFeedParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/kolz_geocentmobile/!svn/ver/32/GeocentMobile/src/kolz/android/rss/BaseFeedParser.java
+END
+AndroidSaxFeedParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/kolz_geocentmobile/!svn/ver/32/GeocentMobile/src/kolz/android/rss/AndroidSaxFeedParser.java
+END

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">GeocentMobile</string>
+    <string name="main_screen">MainScreen</string>
+    <string name="main_no_items">No items to display</string>
+    <string name="splash_screen">SplashScreen</string>
+    <string name="map_button">Show Location</string>
+    <string name="about_button">About Geocent</string>
+    <string name="job_button">Jobs</string>
+    <string name="search_button">Search</string>
+    <string name="job_search_prompt">Select a Job</string>
+    <string name="location_search_prompt">Select a Location</string>
+
+    <string-array name="job_titles">
+        <item>.Net Developer</item>
+        <item>Analyst</item>
+        <item>Java Developer</item>
+    </string-array>
+    <string-array name="locations">
+        <item>Baton Rouge, LA</item>
+        <item>Charleston, SC</item>
+        <item>New Orleans, LA</item>
+    </string-array>
+    <string-array name="mainmenu">
+        <item>Jobs</item>
+        <item>About Geocent</item>
+    </string-array>
+
+    <string name="news_button">News</string>
+    <string name="deltek_button">Deltek</string>
+    <string name="password_query">Password</string>
+    <string name="username_query">Username</string>
+    <string name="save_password">Save Password?</string>
+    <string name="password_button">Submit</string>
+    <string name="feed_url">https://intranet.geocent.com/_layouts/listfeed.aspx?List=%7B7D0593C1%2D2BB0%2D4D43%2DB323%2DA74AA40886C8%7D</string>
+
+    <color name="Blue">#449def</color>
+
+    <style name="ButtonText">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+    <string name="preferences">GeocentPreferences</string>
+    <string name="login">Login</string>
+    <string name="domain_name">geocent.com</string>
+
+</resources>
